@@ -31,11 +31,11 @@ class Contact
     self.first_name == other.first_name
   end
 
-  def list
-    puts "Here is a list of your contacts:"
-    contacts = 
-    contacts.each {|contact| puts contact.first_name}
-  end
+  # def list
+  #   puts "Here is a list of your contacts:"
+  #   contacts = 
+  #   contacts.each {|contact| puts contact.first_name}
+  # end
 
 
 end

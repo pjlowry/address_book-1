@@ -64,10 +64,6 @@ describe Contact do
     end
   end
 
-  # context '#add' do
-
-  # end
-
   context '#full_name' do
     it 'combines the first and last name of the contact into one string' do
       contact = Contact.new('Marcie', 'Morton', '20640 3rd St', 'Suite 200', 'Saratoga', 'CA', 95070, '408.377.7249', 'mmortondc@gmail.com')
@@ -94,13 +90,17 @@ describe Contact do
   end
 
   context '.list' do
-    it 'lists the full name for every contact in the database' do
+    it 'lists every contact in the database' do
       contact1 = Contact.new('Marcie', 'Morton', '20640 3rd St', 'Suite 200', 'Saratoga', 'CA', 95070, '408.377.7249', 'mmortondc@gmail.com')
       contact2 = Contact.new('Dorrit', 'Geshuri', '20640 3rd St', 'Suite 200', 'Saratoga', 'CA', 95070, '408.377.7249', 'mmortondc@gmail.com')
       contact3 = Contact.new('Mike', 'Ignaffo', '20640 3rd St', 'Suite 200', 'Saratoga', 'CA', 95070, '408.377.7249', 'mmortondc@gmail.com')
-      contact_names = [contact1, contact2, contact3]
-      contact_names.each {|contact_name| contact_name.save}
-      Contact.list.map {|contact| (contact.last_name)}.should =~ contact_names('last_name')
+      contacts = [contact1, contact2, contact3]
+      contacts.each {|contact| contact.save}
+      
+      # contacts = Contact.list #['Marcie Morton', 'Dorrit Geshuri']
+      # contacts.map {|contact| contact.full_name}.should =~ contacts
+
+      Contact.list.should =~ contacts
     end
   end
 end
