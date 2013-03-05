@@ -2,40 +2,38 @@ class Contact
 
   attr_reader :first_name, :last_name, :street1, :street2, :city, :state, :zip, :phone, :email
 
-  def initialize(first_name, last_name, street1, street2, city, state, zip, phone, email)
-    @first_name = first_name
-    @last_name = last_name
-    @street1 = street1
-    @street2 = street2
-    @city = city
-    @state = state
-    @zip = zip
-    @phone = phone
-    @email = email
-
+  def initialize(options)
+    @first_name = options['first_name']
+    @last_name = options['last_name']
+    @street1 = options['street1']
+    @street2 = options['street2']
+    @city = options['city']
+    @state = options['state']
+    @zip = options['zip']
+    @phone = options['phone']
+    @email = options['email']
   end
 
   def save
-    DB.exec("INSERT INTO contacts (first_name, last_name, street1, street2, city, state, zip, phone, email) VALUES ('#{@first_name}', '#{@last_name}', '#{@street1}', '#{@street2}', '#{@city}', '#{@state}', #{@zip}, '#{@phone}', '#{@email}')")
+    DB.exec("INSERT INTO contacts (first_name, last_name, street1, street2, city, state, zip, phone, email) VALUES ('#{first_name}', '#{last_name}', '#{street1}', '#{street2}', '#{city}', '#{state}', '#{zip}', '#{phone}', '#{email}');")
   end
 
   def full_name
     full_name = @first_name + " " + @last_name
   end
 
-  def self.find(first_name)
-    DB.exec("SELECT * FROM contacts WHERE first_name = '#{first_name}'").inject([]) {|contact, contact_hash| contact << Contact.new(contact_hash['first_name'], ['last_name'], ['street1'], ['street2'], ['city'], ['state'], ['zip'], ['phone'], ['email'])}.first
-  end
+  # def self.find(search_term)
+  #   DB.exec("SELECT * FROM contacts WHERE first_name = '#{search_term}' OR last_name = '#{search_term}' OR street1 = '#{search_term}' OR street2 = '#{search_term}' OR city = '#{search_term}' OR state = '#{search_term}' OR zip = '#{search_term}' OR phone = '#{search_term}' OR email = '#{search_term}'").inject([]) {|contact, contact_hash| contact << Contact.new(contact_hash['first_name'], ['last_name'], ['street1'], ['street2'], ['city'], ['state'], [zip], ['phone'], ['email'])}
+  # end
 
   def ==(other)
     self.first_name == other.first_name
   end
 
-  # def list
-  #   puts "Here is a list of your contacts:"
-  #   contacts = 
-  #   contacts.each {|contact| puts contact.first_name}
-  # end
+  def self.list
+    DB.exec("SELECT * FROM contacts;").inject([]) {|contacts, attributes| contacts << Contact.new(attributes)}
+  end
 
 
 end
+
