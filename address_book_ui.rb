@@ -68,12 +68,13 @@ def add_phone
   type = gets.chomp
   phone = Phone.new({'number' => number, 'type' => type})
   phone.save
-  puts "Okay! 'You added the #{type} phone number #{number} for (insert name here) \n\n"
+  puts "Okay! 'You added the #{type} phone number #{number} for (insert name here)\n\n\n"
   puts "Would you like to add another number for this contact? (y/n)"
   input = gets.chomp
   if input == 'y'
     add_phone
   else
+    puts "What other information would you like to add? (p for phone, a for address, e for email, f for finished)\n\n\n"
     info
   end
 end
