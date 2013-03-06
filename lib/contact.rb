@@ -1,21 +1,14 @@
 class Contact
 
-  attr_reader :first_name, :last_name, :street1, :street2, :city, :state, :zip, :phone, :email
+  attr_reader :first_name, :last_name
 
   def initialize(options)
     @first_name = options['first_name']
     @last_name = options['last_name']
-    @street1 = options['street1']
-    @street2 = options['street2']
-    @city = options['city']
-    @state = options['state']
-    @zip = options['zip']
-    @phone = options['phone']
-    @email = options['email']
   end
 
   def save
-    DB.exec("INSERT INTO contacts (first_name, last_name, street1, street2, city, state, zip, phone, email) VALUES ('#{first_name}', '#{last_name}', '#{street1}', '#{street2}', '#{city}', '#{state}', '#{zip}', '#{phone}', '#{email}');")
+    DB.exec("INSERT INTO contacts (first_name, last_name) VALUES ('#{first_name}', '#{last_name}');")
   end
 
   def full_name

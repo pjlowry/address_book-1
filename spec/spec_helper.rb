@@ -1,6 +1,7 @@
 require 'pg'
 require 'rspec'
 require 'contact'
+require 'phone'
 
 DB = PG.connect(:dbname => 'address_book_test', :host => 'localhost')
 
