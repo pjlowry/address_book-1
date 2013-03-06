@@ -9,7 +9,7 @@ class Phone
   end
 
   def save
-    DB.exec("INSERT INTO phone_numbers (number, type, contact_id) VALUES ('#{number}', '#{type}', #{contact_id});")
+    DB.exec("INSERT INTO phone_numbers (number, type) VALUES ('#{number}', '#{type}');")
   end
 end
 

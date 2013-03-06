@@ -42,28 +42,40 @@ def add_new_contact
   contact.save
   "'#{first_name} #{last_name}' has been added to your Fucking Address Book."
   puts "What other information would you like to add? (p for phone, a for address, e for email, f for finished)"
-  choice = gets.chomp
-    case choice
-      when 'p'
-        add_phone
-      when 'a'
-        add_address
-      when 'e'
-        add_email
-      when 'f'
-        finish
-      else
-        invalid
-    end
+  info
+end
+
+def info
+  what_info = gets.chomp
+      case what_info
+        when 'p'
+          add_phone
+        when 'a'
+          add_address
+        when 'e'
+          add_email
+        when 'f'
+          finish
+        else
+          invalid
+      end
 end
 
 def add_phone
   puts "Enter the phone number in this format: xxx.xxx.xxxx"
-  phone = gets.chomp
+  number = gets.chomp
   puts "What type of phone is this?  (cell, home or work?)"
   type = gets.chomp
+  phone = Phone.new({'number' => number, 'type' => type})
   phone.save
-  puts "Okay! '#{first_name} #{last_name}' now has a #{type} phone of #{phone}"
+  puts "Okay! 'You added the #{type} phone number #{number} for (insert name here) \n\n"
+  puts "Would you like to add another number for this contact? (y/n)"
+  input = gets.chomp
+  if input == 'y'
+    add_phone
+  else
+    info
+  end
 end
 
 welcome

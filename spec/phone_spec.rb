@@ -32,8 +32,8 @@ describe Phone do
 
   context '#save' do
     it 'saves the phone info to the database' do
-      DB.should_receive(:exec).with("INSERT INTO phone_numbers (number, type, contact_id) VALUES ('408.335.3255', 'cell', 1);")
-      attributes = {'number' => '408.335.3255', 'type' => 'cell', 'contact_id' => 1}
+      DB.should_receive(:exec).with("INSERT INTO phone_numbers (number, type) VALUES ('408.335.3255', 'cell');")
+      attributes = {'number' => '408.335.3255', 'type' => 'cell'}
       phone = Phone.new(attributes)
       phone.save
     end
