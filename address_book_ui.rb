@@ -5,7 +5,7 @@ require './lib/phone'
 DB = PG.connect(:dbname => 'address_book_test', :host => 'localhost')
 
 def welcome
-  puts "Welcome to the Fucking Address Book!"
+  puts "Welcome to Address Book!"
   menu
 end
 
@@ -40,7 +40,7 @@ def add_new_contact
   last_name = gets.chomp
   contact = Contact.new({'first_name' => first_name, 'last_name' => last_name})
   contact.save
-  "'#{first_name} #{last_name}' has been added to your Fucking Address Book."
+  "'#{first_name} #{last_name}' has been added to your Address Book."
   puts "What other information would you like to add? (p for phone, a for address, e for email, f for finished)"
   info
 end
